@@ -1,0 +1,8 @@
+"__pycache__/" 
+"*.pyc" 
+".env" 
+"yolov8n.pt" 
+".env" 
+.env 
+.neon
+node_modules/

@@ -1,0 +1,13 @@
+streamlit
+plotly
+pandas
+numpy
+pillow
+requests
+folium
+streamlit-folium
+streamlit-webrtc
+av
+python-dotenv
+opencv-python-headless
+rich<14
