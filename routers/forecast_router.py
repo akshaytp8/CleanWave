@@ -3,14 +3,14 @@ from sqlalchemy.orm import Session
 from database import get_db
 from models.forecast_model import WasteForecast, WasteHistory
 from ml.forecasting import generate_forecast
-from data.synthetic_data import DELHI_WARDS
+from data.synthetic_data import TIRURANGADI_WARDS
 import uuid
 
 router = APIRouter()
 
 @router.get("/ward/{ward_id}")
 def get_ward_forecast(ward_id: str, days: int = 7, db: Session = Depends(get_db)):
-    ward = next((w for w in DELHI_WARDS if w["id"] == ward_id), None)
+    ward = next((w for w in TIRURANGADI_WARDS if w["id"] == ward_id), None)
     if not ward:
         return {"error": "Ward not found"}
     history = db.query(WasteHistory).filter(WasteHistory.ward_id == ward_id).order_by(WasteHistory.recorded_date).all()
@@ -21,7 +21,7 @@ def get_ward_forecast(ward_id: str, days: int = 7, db: Session = Depends(get_db)
 @router.get("/all-wards")
 def get_all_wards_forecast(db: Session = Depends(get_db)):
     results = []
-    for ward in DELHI_WARDS:
+    for ward in TIRURANGADI_WARDS:
         history = db.query(WasteHistory).filter(WasteHistory.ward_id == ward["id"]).order_by(WasteHistory.recorded_date).all()
         history_data = [{"recorded_date": h.recorded_date, "actual_volume_kg": h.actual_volume_kg} for h in history]
         forecasts = generate_forecast(ward["id"], ward["name"], history_data, 7)
@@ -47,4 +47,4 @@ def get_history(ward_id: str, days: int = 30, db: Session = Depends(get_db)):
 
 @router.get("/wards")
 def get_wards():
-    return DELHI_WARDS
+    return TIRURANGADI_WARDS

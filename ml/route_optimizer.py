@@ -83,7 +83,7 @@ def _ortools_optimize(collection_points, num_trucks):
         if route_points:
             dist_km = total_dist / 100
             routes.append({
-                "truck_id": f"MCD-T{truck_id+1:02d}",
+                "truck_id": f"MPM-T{truck_id+1:02d}",
                 "collection_sequence": route_points,
                 "total_distance_km": round(dist_km, 2),
                 "estimated_time_minutes": round(dist_km * 3 + len(route_points) * 7, 1),
@@ -117,7 +117,7 @@ def _greedy_optimize(collection_points, num_trucks):
             for j in range(len(ordered)-1)
         )
         routes.append({
-            "truck_id": f"MCD-T{i+1:02d}",
+            "truck_id": f"MPM-T{i+1:02d}",
             "collection_sequence": ordered,
             "total_distance_km": round(total_dist, 2),
             "estimated_time_minutes": round(total_dist * 3 + len(ordered) * 7, 1),

@@ -1,4 +1,4 @@
-# CycleIQ — AI-Powered Circular Waste Intelligence for Delhi
+# CycleIQ — AI-Powered Circular Waste Intelligence for Tirurangadi
 
 > **India Innovates 2026 Hackathon** · Team Sigmoid · JSS University  
 > Domain: Urban Solutions · Prize Pool: ₹10,00,000+
@@ -7,9 +7,9 @@
 
 ## The Problem
 
-Delhi generates **11,000 tonnes of waste every day**. Despite a city-wide mandate for source segregation — households are required to separate wet and dry waste — compliance is near zero. Trucks run on fixed schedules regardless of whether bins are full or empty, wasting fuel and manpower. There is no feedback loop: citizens have no reason to segregate properly, and the city has no real-time visibility into what is happening on the ground.
+CycleIQ is being adapted as a **Tirurangadi Municipality pilot** in Malappuram district, Kerala. It uses the 39 ward names listed in the [Government of Kerala Local Self Government Department's 2020 election roster](https://lsgkerala.gov.in/en/lbelection/electdmemberdet/2020/1274). Verify the current ward list with the municipality before operational use. The repository's waste estimates, population coverage, collection schedules, and processing destinations remain demonstration data; the plotted ward coordinates are approximate markers around Chemmad, not ward boundaries or centroids.
 
-The result: overflowing bins in some wards, unnecessary truck visits in others, recyclable material buried in landfills, and a system that is reactive instead of intelligent.
+The pilot should establish its baseline with local operators before treating any dashboard metric as a measured result.
 
 ---
 
@@ -17,14 +17,14 @@ The result: overflowing bins in some wards, unnecessary truck visits in others, 
 
 CycleIQ is an end-to-end waste intelligence platform that closes the loop between **citizens, bins, trucks, and city planners** using computer vision, IoT simulation, route optimization, and AI forecasting.
 
-The system targets **apartment complexes and community collection points** — shared bin areas where residents drop waste before MCD trucks collect it. This is where Delhi's source segregation mandate is supposed to be enforced, and where CycleIQ intervenes.
+The system targets **community collection points** where residents hand over segregated waste to local collection teams. Collection workflows, accepted material categories, service schedules, and disposal destinations must follow the participating local body's procedures.
 
 ---
 
 ## How It Works — The Full Story
 
 ### 1. Computer Vision at Source
-A camera mounted above each community bin collection point watches which bin residents use. Delhi's mandate requires separate green bins (wet/organic) and blue bins (dry/recyclable). The camera does not need to see inside bags — it detects which bin a person opens and whether the waste type matches.
+A camera mounted above a community collection point can help monitor waste sorting. The local body should determine the appropriate categories, bin colors, signage, and handling procedures for the pilot.
 
 CycleIQ uses **YOLOv8**, a state-of-the-art real-time object detection model, to classify waste as:
 - **Biodegradable** — food waste, organic matter
@@ -36,7 +36,7 @@ A **segregation score** (0–100) is calculated per classification based on how 
 ### 2. Citizen Incentives Tied to Segregation Quality
 When a ward's collection points consistently show high segregation scores, citizens in that ward earn points on the CycleIQ platform. This is community-level gamification — not individual surveillance — creating peer pressure and collective accountability. Citizens can view their ward's leaderboard and track their own contribution.
 
-This directly addresses why source segregation fails in Delhi today: there is no personal benefit to doing it correctly. CycleIQ creates one.
+Any citizen reward program is a demonstration only until its local partners, redemption process, and approval are confirmed.
 
 ### 3. IoT Fill Level Monitoring
 Each bin is equipped with an **ultrasonic sensor** that measures the distance from the sensor to the waste surface, calculating fill percentage. This data is transmitted in real time to the CycleIQ API via GSM or LoRa network.
@@ -49,7 +49,7 @@ CycleIQ uses **Google OR-Tools** with a GlobalSpanCostCoefficient constraint to 
 This replaces fixed-schedule collection — a major source of inefficiency — with demand-driven collection. The system visualises routes on an interactive map with per-truck details including estimated distance and number of stops.
 
 ### 5. 7-Day Waste Volume Forecasting
-Using **Facebook Prophet** (with a statistical fallback for environments where Prophet is unavailable), CycleIQ forecasts waste volume for each of Delhi's 20 wards over the next 7 days. Each ward has a distinct forecast based on its historical volume, seasonality, and day-of-week patterns.
+Using **Facebook Prophet** (with a statistical fallback for environments where Prophet is unavailable), CycleIQ can forecast waste volume for configured pilot wards. The current sample history is illustrative; replace it with verified Tirurangadi collection records.
 
 This allows city planners to pre-position trucks and staff before high-volume periods (festivals, weekends, seasonal spikes) rather than reacting after bins overflow.
 
@@ -107,7 +107,7 @@ cycleiq/
 │   ├── route_optimizer.py           # OR-Tools balanced routing
 │   └── llm_engine.py                # Groq/Llama with real DB context
 ├── data/
-│   └── synthetic_data.py            # 20 Delhi wards, 180 days history, 150 citizens
+│   └── synthetic_data.py            # 39 Tirurangadi wards (2020 roster) and demo data
 └── streamlit_app/
     ├── app.py                       # Main dashboard — 6 KPIs, alerts
     └── pages/
@@ -166,7 +166,7 @@ cd streamlit_app
 streamlit run app.py
 ```
 
-The database seeds automatically on first startup with synthetic data for 20 Delhi wards, 150 citizens, and 180 days of waste history.
+An empty database seeds automatically on first startup with synthetic pilot data for 39 wards, 150 citizens, and 180 days of waste history. The ward names follow the 2020 election roster; verify any subsequent delimitation or renaming with the municipality. Coordinates are illustrative markers, and summary metrics are not live measurements or verified population coverage. Existing database records are not automatically replaced or migrated.
 
 - API: http://localhost:8000
 - API Docs: http://localhost:8000/docs
@@ -205,4 +205,4 @@ For local demo (recommended for presentations), run both terminals and open `loc
 - Daksh Kumar
 
 **Event:** India Innovates 2026 — World's Largest Civic Tech Hackathon  
-**Finale:** March 28, 2026 · Bharat Mandapam, New Delhi
+**Pilot area:** Tirurangadi Municipality, Malappuram district, Kerala

@@ -234,7 +234,7 @@ Each task references specific requirements from the requirements document for tr
 - [ ] 13. Prepare route optimization infrastructure
   - [ ] 13.1 Set up map data and routing engine
     - Integrate with mapping service API (Google Maps/OpenStreetMap)
-    - Load Delhi road network data
+    - Load road-network data for the configured Tirurangadi pilot area
     - Create distance and time calculation utilities
     - _Requirements: 4.3, 6.2_
   
@@ -630,7 +630,7 @@ Each task references specific requirements from the requirements document for tr
     - _Requirements: 5.5_
   
   - [ ] 31.3 Prepare training materials
-    - Create training videos for MCD staff
+    - Create training videos for local-body staff
     - Prepare presentation slides for hackathon
     - Document system capabilities and limitations
     - _Requirements: 5.5_
@@ -643,13 +643,13 @@ Each task references specific requirements from the requirements document for tr
     - _Requirements: 5.6_
   
   - [ ] 32.2 Conduct user acceptance testing (UAT)
-    - Test with MCD administrators
+    - Test with local-body administrators
     - Test with sample citizens
     - Collect feedback and make adjustments
     - _Requirements: 5.5_
   
   - [ ] 32.3 Deploy to production
-    - Deploy to MCD on-premise infrastructure
+    - Deploy to approved local-body infrastructure
     - Configure production monitoring and alerts
     - Verify all services are running
     - Conduct smoke tests

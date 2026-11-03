@@ -2,7 +2,7 @@
 
 ## 1. Overview
 
-The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech solution designed for the Municipal Corporation of Delhi (MCD) to modernize waste management operations through artificial intelligence, computer vision, and predictive analytics. The system aims to improve waste segregation accuracy, optimize collection routes, predict waste generation patterns, and incentivize citizen participation in sustainable waste management practices.
+The AI-Driven Circular Waste Intelligence System is a civic-tech pilot being adapted for Tirurangadi Municipality, Kerala. Its ward names follow the Government of Kerala Local Self Government Department's 2020 election roster; verify the current list with the municipality. Sample figures and mapped coordinates are illustrative, not official operational data.
 
 ## 2. Goals and Objectives
 
@@ -10,14 +10,14 @@ The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech s
 - Automate waste classification at collection points using computer vision
 - Predict ward-wise waste generation patterns to optimize resource allocation
 - Minimize collection truck emissions through intelligent route optimization
-- Provide actionable insights to MCD administrators through natural language recommendations
+- Provide actionable insights to local-body staff through natural-language recommendations
 - Encourage citizen participation through gamified incentive tracking
 
 ### Success Metrics
 - Achieve >85% accuracy in waste classification across all categories
 - Reduce collection truck emissions by 20% through optimized routing
 - Improve waste segregation compliance by 30% within 6 months
-- Process and analyze data from 100+ collection points across Delhi wards
+- Support data from collection points in the configured Tirurangadi pilot area
 - Achieve <2 second response time for real-time waste classification
 
 ## 3. User Stories and Acceptance Criteria
@@ -52,7 +52,7 @@ The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech s
 ### 3.2 Time Series Forecasting Module
 
 #### User Story 3.2.1: Ward-wise Waste Generation Prediction
-**As an** MCD resource planner  
+**As a** local-body resource planner
 **I want** to predict waste generation patterns for each ward  
 **So that** I can allocate collection resources efficiently
 
@@ -65,7 +65,7 @@ The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech s
 - Model retrains automatically with new data on a weekly basis
 
 #### User Story 3.2.2: Anomaly Detection
-**As an** MCD operations manager  
+**As a** local-body operations manager
 **I want** to be alerted about unusual waste generation patterns  
 **So that** I can investigate and respond to potential issues
 
@@ -104,7 +104,7 @@ The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech s
 ### 3.4 LLM-Powered Admin Dashboard
 
 #### User Story 3.4.1: Natural Language Insights
-**As an** MCD administrator  
+**As a** local-body administrator
 **I want** data insights translated into plain-language recommendations  
 **So that** I can make informed decisions without technical expertise
 
@@ -117,7 +117,7 @@ The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech s
 - Dashboard supports Hindi and English languages
 
 #### User Story 3.4.2: Comprehensive Reporting
-**As an** MCD senior official  
+**As a** local-body official
 **I want** automated reports on waste management performance  
 **So that** I can track progress and identify improvement areas
 
@@ -265,7 +265,7 @@ The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech s
 ## 7. Assumptions and Dependencies
 
 ### 7.1 Assumptions
-- MCD will provide access to historical waste collection data
+- The participating local body will confirm access to historical waste collection data
 - IoT cameras will be installed at collection points before system deployment
 - Internet connectivity is available at all collection points
 - Collection trucks have GPS-enabled devices for route tracking
@@ -273,8 +273,8 @@ The AI-Driven Circular Waste Intelligence System is a comprehensive civic tech s
 
 ### 7.2 Dependencies
 - Availability of labeled waste image dataset for model training
-- MCD approval for system deployment and citizen data collection
-- Integration with existing MCD IT infrastructure
+- Local-body approval for system deployment and citizen data collection
+- Integration with the participating local body's IT infrastructure
 - Third-party mapping services for route optimization
 - Cloud infrastructure for hosting (AWS, GCP, or Azure)
 
@@ -312,7 +312,7 @@ The following items are explicitly out of scope for this project:
 
 ## 10. Glossary
 
-- **Ward**: Administrative division of Delhi for municipal governance
+- **Ward**: Administrative division used by the participating local body
 - **Collection Point**: Physical location where waste is collected from citizens
 - **Segregation**: Process of separating waste into different categories
 - **Biodegradable Waste**: Organic waste that decomposes naturally (food scraps, garden waste)

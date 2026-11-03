@@ -4,6 +4,8 @@ import pandas as pd
 import folium
 from streamlit_folium import st_folium
 import plotly.graph_objects as go
+from math import isfinite
+from urllib.parse import urlencode
 
 st.markdown("""
 <style>
@@ -42,13 +44,58 @@ def _get_api():
 API = _get_api()
 TRUCK_COLORS = ["#4ade80","#60a5fa","#f59e0b","#f87171","#a78bfa","#34d399"]
 
+def _route_stops_with_coordinates(sequence):
+    stops = []
+    for stop in sequence:
+        lat = stop.get("lat")
+        lon = stop.get("lon")
+        if lat is None:
+            lat = stop.get("latitude")
+        if lon is None:
+            lon = stop.get("longitude")
+        try:
+            lat, lon = float(lat), float(lon)
+        except (TypeError, ValueError):
+            continue
+        if isfinite(lat) and isfinite(lon) and -90 <= lat <= 90 and -180 <= lon <= 180:
+            stops.append((stop, [lat, lon]))
+    return stops
+
+
+def _google_maps_directions_segments(stops):
+    coordinates = [f"{coord[0]},{coord[1]}" for _, coord in stops]
+    segments = []
+    start = 0
+    while start < len(coordinates):
+        segment = coordinates[start:start + 5]
+        if len(segment) == 1:
+            url = "https://www.google.com/maps/search/?" + urlencode({
+                "api": "1",
+                "query": segment[0],
+            })
+        else:
+            params = {
+                "api": "1",
+                "origin": segment[0],
+                "destination": segment[-1],
+                "travelmode": "driving",
+            }
+            if len(segment) > 2:
+                params["waypoints"] = "|".join(segment[1:-1])
+            url = "https://www.google.com/maps/dir/?" + urlencode(params)
+        segments.append(url)
+        if start + 5 >= len(coordinates):
+            break
+        start += 4
+    return segments
+
 
 # ── Shared sidebar ────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
     <div style="padding:1.2rem 0 1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
         <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CycleIQ</div>
-        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Delhi Waste Intelligence</div>
+        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
         <div style="margin-top:0.75rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
             <span style="background:#0d2010;border:1px solid #4ade8030;color:#4ade80;font-size:0.62rem;padding:1px 7px;border-radius:10px;">IoT Live</span>
             <span style="background:#0d1a2e;border:1px solid #60a5fa30;color:#60a5fa;font-size:0.62rem;padding:1px 7px;border-radius:10px;">YOLOv8</span>
@@ -137,21 +184,16 @@ if st.session_state.routes:
     col_map, col_list = st.columns([3, 2], gap="large")
 
     with col_map:
-        m = folium.Map(location=[28.6139, 77.2090], zoom_start=11, tiles="CartoDB dark_matter")
+        m = folium.Map(location=[11.0430, 75.9130], zoom_start=13, tiles="OpenStreetMap")
         for i, route in enumerate(routes):
             color = TRUCK_COLORS[i % len(TRUCK_COLORS)]
             seq = route.get("collection_sequence", [])
-            # Safely get lat/lon with fallbacks
-            coords = []
-            for s in seq:
-                lat = s.get("lat") or s.get("latitude")
-                lon = s.get("lon") or s.get("longitude")
-                if lat and lon:
-                    coords.append([lat, lon])
+            stops = _route_stops_with_coordinates(seq)
+            coords = [coord for _, coord in stops]
             if len(coords) > 1:
                 folium.PolyLine(coords, color=color, weight=2.5, opacity=0.8,
                                 tooltip=route["truck_id"]).add_to(m)
-            for j, (stop, coord) in enumerate(zip(seq, coords)):
+            for j, (stop, coord) in enumerate(stops):
                 folium.CircleMarker(
                     location=coord, radius=5,
                     color=color, fill=True, fill_color=color, fill_opacity=0.9,
@@ -159,6 +201,7 @@ if st.session_state.routes:
                     tooltip=f"{route['truck_id']} — Stop {j+1}"
                 ).add_to(m)
         st_folium(m, height=440, use_container_width=True)
+        st.caption("Street map tiles require an internet connection. No API key is needed.")
 
     with col_list:
         st.markdown("**Route Details**")
@@ -179,6 +222,16 @@ if st.session_state.routes:
                 <div class="truck-stat">Emissions: <span>{route['estimated_emissions_kg']:.2f} kg CO₂</span></div>
             </div>
             """, unsafe_allow_html=True)
+            route_stops = _route_stops_with_coordinates(route.get("collection_sequence", []))
+            map_segments = _google_maps_directions_segments(route_stops)
+            if len(map_segments) == 1:
+                st.link_button("Open in Google Maps", map_segments[0])
+            elif map_segments:
+                st.caption("Long routes are split into consecutive Google Maps segments.")
+                for segment_index, url in enumerate(map_segments, start=1):
+                    st.link_button(f"Open segment {segment_index} in Google Maps", url)
+            else:
+                st.caption("Google Maps directions are unavailable: this route has no valid stop coordinates.")
 
         fig = go.Figure(go.Bar(
             x=[r["truck_id"] for r in routes],

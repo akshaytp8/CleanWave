@@ -3,7 +3,7 @@ import sys, os
 _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _root not in sys.path:
     sys.path.insert(0, _root)
-from data.real_data import get_all_wards_summary, DELHI_TOTAL_WASTE_TPD
+from data.real_data import get_all_wards_summary
 
 st.markdown("""
 <style>
@@ -31,18 +31,18 @@ st.markdown(f"""
         CycleIQ
     </div>
     <div style="font-size:1.2rem;color:#6b8f74;max-width:600px;line-height:1.6;margin-bottom:1.5rem;">
-        AI-powered circular waste intelligence for Delhi.
-        Turning 10,500 tonnes of daily waste from a problem into a resource.
+        AI-powered circular waste intelligence for Tirurangadi Municipality, Kerala.
+        A pilot-ready dashboard using clearly marked sample data.
     </div>
     <div style="display:flex;gap:1rem;flex-wrap:wrap;">
         <div style="background:#0d2010;border:1px solid #4ade8040;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;color:#4ade80;">
-            🟢 {city['daily_waste_monitored_tonnes']:,} tonnes/day monitored
+            🟢 {city['daily_waste_monitored_tonnes']:,} tonnes/day sample scenario
         </div>
         <div style="background:#0d1a2e;border:1px solid #60a5fa40;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;color:#60a5fa;">
-            🔵 20 Delhi wards · {city['total_population_covered']:,} residents
+            🔵 39 ward names from the 2020 official roster
         </div>
         <div style="background:#1a0800;border:1px solid #f8717140;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;color:#f87171;">
-            🔴 {city['daily_landfill_reduction']} t/day diverted from landfill
+            🔴 {city['daily_landfill_reduction']} t/day sample diversion scenario
         </div>
     </div>
 </div>
@@ -52,9 +52,9 @@ st.markdown(f"""
 st.markdown("### The Problem")
 col1, col2, col3 = st.columns(3)
 problems = [
-    ("10,500 t/day", "Delhi's daily waste", "Only 23% currently segregated at source", "#ef4444"),
-    ("3 overflowing landfills", "Ghazipur · Bhalswa · Okhla", "All exceeding capacity, creating health crises", "#f59e0b"),
-    ("₹1,800 Cr/year", "MCD waste management spend", "Trucks run fixed schedules regardless of bin levels", "#60a5fa"),
+    ("Local data needed", "Waste generated", "Configure this pilot with verified local-body records", "#ef4444"),
+    ("Local data needed", "Processing destinations", "Add approved collection and processing facilities", "#f59e0b"),
+    ("Pilot scenario", "Collection operations", "Tune schedules and routes with local operators", "#60a5fa"),
 ]
 for col, (stat, label, desc, color) in zip([col1, col2, col3], problems):
     with col:
@@ -75,7 +75,7 @@ steps = [
     ("🤖", "AI Classification", "YOLOv8 camera at collection points identifies waste type. 3-bin system: Green · Blue · Red."),
     ("📈", "Smart Forecasting", "Prophet ML predicts overflow 48hrs before it happens — before festivals, weekends."),
     ("🚛", "Route Optimisation", "OR-Tools sends trucks only where needed. 22% fewer km driven. Real CO₂ reduction."),
-    ("🏆", "Citizen Incentives", "Wards that segregate well earn points. Citizens redeem for DMRC credits, bill discounts."),
+    ("🏆", "Citizen Incentives", "Wards can earn sample points; confirm reward partners and redemption rules locally."),
     ("♻️", "Circular Economy", "Every classification feeds a live material flow tracker showing real diverted tonnage."),
 ]
 col_a, col_b, col_c = st.columns(3)
@@ -96,14 +96,14 @@ st.markdown("<div style='height:1.5rem'></div>", unsafe_allow_html=True)
 # ── Navigation guide ──────────────────────────────────────────────────────────
 st.markdown("### Explore the Dashboard")
 nav_items = [
-    ("🏠", "Overview", "Live KPIs, fill levels, hazardous alerts across all 20 wards"),
+    ("🏠", "Overview", "Live KPIs, fill levels, and alerts across all 39 roster wards"),
     ("🗺️", "Waste Map", "Real-time Folium map — toggle Fill / Hazardous / Both layers"),
     ("📈", "Forecasting", "7-day Prophet forecast per ward — see which wards will overflow"),
     ("🚛", "Route Optimizer", "OR-Tools optimised truck routes — live fill data, CO₂ calculated"),
-    ("🤖", "AI Assistant", "Ask anything about Delhi waste — backed by real ward data via Groq/Llama 3.1"),
+    ("🤖", "AI Assistant", "Ask about the configured pilot data via Groq/Llama 3.1"),
     ("👥", "Citizens & Rewards", "Leaderboard, rewards redemption, ward report card, community nudges"),
     ("📷", "Waste Classifier", "Upload image or use live camera — YOLOv8 identifies waste type + correct bin"),
-    ("♻️", "Circular Economy", "Real CPCB data — before vs after, per-ward landfill reduction, CO₂ impact"),
+    ("♻️", "Circular Economy", "Illustrative material-flow scenario; configure verified local data before use"),
     ("🚛", "Driver View", "Simplified route card for truck drivers — same routes as optimizer"),
     ("🎥", "Bin Monitor", "Upload sorting video — zone-based detection, correct/wrong bin, fill estimation"),
 ]
@@ -133,10 +133,11 @@ with col_d1:
         <div style="font-size:0.75rem;color:#4ade80;font-weight:700;text-transform:uppercase;
                     letter-spacing:0.08em;margin-bottom:0.75rem;">💰 Funding</div>
         <div style="font-size:0.8rem;color:#6b8f74;line-height:1.8;">
-            <div>• Smart Cities Mission (MoHUA)</div>
-            <div>• AMRUT 2.0 municipal grants</div>
-            <div>• MCD annual sanitation budget</div>
-            <div style="margin-top:0.5rem;color:#e8ede9;font-weight:600;">Pilot cost: ~₹45L for 1 ward</div>
+            <div>• Explore eligible state and national programs</div>
+            <div>• Confirm grant eligibility with the local body</div>
+            <div>• Local-body and community partnerships</div>
+            <div>• Funding assumptions require local validation</div>
+            <div style="margin-top:0.5rem;color:#e8ede9;font-weight:600;">Pilot budget: to be determined</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -146,11 +147,10 @@ with col_d2:
         <div style="font-size:0.75rem;color:#60a5fa;font-weight:700;text-transform:uppercase;
                     letter-spacing:0.08em;margin-bottom:0.75rem;">🔧 Hardware</div>
         <div style="font-size:0.8rem;color:#6b8f74;line-height:1.8;">
-            <div>• IoT fill sensor: ₹8,000/point</div>
-            <div>• CV camera unit: ₹12,000/point</div>
-            <div>• 3 collection points/ward avg</div>
-            <div>• Installation + connectivity: ₹5,000</div>
-            <div style="margin-top:0.5rem;color:#e8ede9;font-weight:600;">₹75,000 hardware per ward</div>
+            <div>• Sensor and camera requirements: to be assessed</div>
+            <div>• Confirm collection points with local teams</div>
+            <div>• Installation and connectivity: to be quoted</div>
+            <div style="margin-top:0.5rem;color:#e8ede9;font-weight:600;">Hardware budget: to be determined</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -160,11 +160,11 @@ with col_d3:
         <div style="font-size:0.75rem;color:#fbbf24;font-weight:700;text-transform:uppercase;
                     letter-spacing:0.08em;margin-bottom:0.75rem;">📊 ROI</div>
         <div style="font-size:0.8rem;color:#6b8f74;line-height:1.8;">
-            <div>• 22% truck route reduction</div>
-            <div>• ₹2.1L/month saved per ward</div>
-            <div>• Landfill life extended ~8 yrs</div>
-            <div>• Carbon credits: ₹800/tonne CO₂</div>
-            <div style="margin-top:0.5rem;color:#e8ede9;font-weight:600;">ROI breakeven: 18 months</div>
+            <div>• Measure route distance against a local baseline</div>
+            <div>• Track collection and processing costs</div>
+            <div>• Quantify diversion with verified weights</div>
+            <div>• Validate emissions assumptions locally</div>
+            <div style="margin-top:0.5rem;color:#e8ede9;font-weight:600;">Pilot outcomes: not yet measured</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -183,7 +183,7 @@ st.markdown("""
     </div>
     <div style="font-size:0.75rem;color:#4ade80;font-family:'DM Mono',monospace;text-align:right;">
         India Innovates 2026<br>
-        <span style="color:#6b8f74;">Bharat Mandapam, New Delhi</span>
+        <span style="color:#6b8f74;">Tirurangadi Municipality · Kerala</span>
     </div>
 </div>
 """, unsafe_allow_html=True)

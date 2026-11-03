@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="CycleIQ — Delhi Waste Intelligence",
+    page_title="CycleIQ — Tirurangadi Waste Intelligence",
     page_icon="🌿",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -45,7 +45,15 @@ from datetime import datetime, timedelta
 _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _root not in sys.path:
     sys.path.insert(0, _root)
-from data.real_data import get_all_wards_summary, get_ward_waste_stats, WARD_REAL_DATA, BASELINE_LANDFILL_RATE, CYCLEIQ_LANDFILL_RATE, BASELINE_RECYCLING_RATE, CYCLEIQ_RECYCLING_RATE, BASELINE_COMPOST_RATE, CYCLEIQ_COMPOST_RATE
+from data.real_data import (
+    BASELINE_COMPOST_RATE,
+    BASELINE_LANDFILL_RATE,
+    BASELINE_RECYCLING_RATE,
+    CYCLEIQ_COMPOST_RATE,
+    CYCLEIQ_LANDFILL_RATE,
+    CYCLEIQ_RECYCLING_RATE,
+    get_all_wards_summary,
+)
 
 import os, requests as _req
 
@@ -81,7 +89,7 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:1.2rem 0 1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
         <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CycleIQ</div>
-        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Delhi Waste Intelligence</div>
+        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
         <div style="margin-top:0.75rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
             <span style="background:#0d2010;border:1px solid #4ade8030;color:#4ade80;font-size:0.62rem;padding:1px 7px;border-radius:10px;">IoT Live</span>
             <span style="background:#0d1a2e;border:1px solid #60a5fa30;color:#60a5fa;font-size:0.62rem;padding:1px 7px;border-radius:10px;">YOLOv8</span>
@@ -151,7 +159,7 @@ if not ws_df.empty:
                 {len(haz_wards)} ward(s) exceeding 10% hazardous threshold —
                 <strong>{', '.join(haz_names[:3])}</strong>
                 {' ...' if len(haz_names) > 3 else ''}.
-                Requires DPCC-authorised special collection vehicle.
+                Requires an authorized hazardous-waste collection service.
             </span>
         </div>
         """, unsafe_allow_html=True)
@@ -160,7 +168,7 @@ if not ws_df.empty:
 city_real = get_all_wards_summary()
 
 c1, c2, c3, c4, c5, c6, c7 = st.columns(7)
-with c1: st.metric("Wards Monitored", summary.get("total_wards", 20))
+with c1: st.metric("Wards Monitored", summary.get("total_wards", 39))
 with c2: st.metric("Collection Points", summary.get("total_collection_points", 0))
 with c3:
     fill = summary.get("avg_fill_level", 0)
@@ -170,8 +178,7 @@ with c4: st.metric("High Priority", summary.get("high_priority_points", 0), delt
 with c5:
     haz_count = int(ws_df[ws_df["avg_hazardous"] > 10].shape[0]) if not ws_df.empty else 0
     st.metric("Hazardous Alerts", haz_count, delta="wards >10% hazardous", delta_color="inverse" if haz_count > 0 else "off")
-with c6: st.metric("Waste Monitored", f"{city_real['daily_waste_monitored_tonnes']:,}t/day", delta=f"{city_real['coverage_pct']}% of Delhi")
-with c6: st.metric("Waste Monitored", f"{city_real['daily_waste_monitored_tonnes']:,}t/day", delta=f"{city_real['coverage_pct']}% of Delhi")
+with c6: st.metric("Illustrative Waste Scenario", f"{city_real['daily_waste_monitored_tonnes']:,}t/day", delta="sample estimate · not live data")
 with c7: st.metric("Citizens Enrolled", f"{summary.get('total_citizens', 0):,}")
 
 st.markdown("<div style='height:1.2rem'></div>", unsafe_allow_html=True)
@@ -342,15 +349,14 @@ with tab_economy:
     st.markdown(f"""
     <div style="background:#0d1a2e;border:1px solid #60a5fa30;border-radius:10px;
                 padding:0.6rem 1rem;margin-bottom:1rem;font-size:0.75rem;color:#6b8f74;">
-        📊 Sources: <span style="color:#60a5fa;">CPCB Annual Report 2023</span> ·
-        <span style="color:#60a5fa;">Census 2011</span> ·
-        <span style="color:#60a5fa;">Swachh Survekshan 2022</span> ·
-        Coverage: <span style="color:#e8ede9;">{city_real['coverage_pct']}% of Delhi</span> ({city_real['total_population_covered']:,} residents)
+        ⚠ <span style="color:#60a5fa;">Illustrative pilot scenario only</span> ·
+        Replace sample values with verified local-body records before operational use.
+        Population coverage: <span style="color:#e8ede9;">not configured</span>.
     </div>
     """, unsafe_allow_html=True)
 
     ec1, ec2, ec3, ec4 = st.columns(4)
-    with ec1: st.metric("Waste Monitored", f"{d:,} t/day")
+    with ec1: st.metric("Scenario Waste", f"{d:,} t/day")
     with ec2: st.metric("Landfill Reduction", f"{city_real['daily_landfill_reduction']} t/day", delta=f"{round(city_real['daily_landfill_reduction']/city_real['current_daily_landfill']*100,1)}% less")
     with ec3: st.metric("CO₂ Saved Daily", f"{city_real['daily_co2_saved_tonnes']} t")
     with ec4: st.metric("Annual CO₂ Saving", f"{int(city_real['annual_co2_saved_tonnes']):,} t", delta=f"≈{int(city_real['annual_co2_saved_tonnes']/4.6):,} cars removed")

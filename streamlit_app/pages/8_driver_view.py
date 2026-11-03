@@ -43,7 +43,7 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:1.2rem 0 1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
         <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CycleIQ</div>
-        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Delhi Waste Intelligence</div>
+        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
         <div style="margin-top:0.75rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
             <span style="background:#0d2010;border:1px solid #4ade8030;color:#4ade80;font-size:0.62rem;padding:1px 7px;border-radius:10px;">IoT Live</span>
             <span style="background:#0d1a2e;border:1px solid #60a5fa30;color:#60a5fa;font-size:0.62rem;padding:1px 7px;border-radius:10px;">YOLOv8</span>
@@ -164,7 +164,7 @@ col_map, col_stops = st.columns([3, 2], gap="large")
 
 with col_map:
     st.markdown(f"**Route Map — {selected_truck_id}**")
-    m = folium.Map(location=[28.6139, 77.2090], zoom_start=11, tiles="CartoDB dark_matter")
+    m = folium.Map(location=[11.0430, 75.9130], zoom_start=13, tiles="CartoDB dark_matter")
 
     coords = []
     for s in seq:
@@ -260,6 +260,6 @@ with col_stops:
     <div style="margin-top:0.75rem;background:#1a0800;border:1px solid #ef444430;border-radius:8px;
                 padding:0.7rem 0.9rem;font-size:0.74rem;color:#fca5a5;">
         <b>Reminder:</b> Red bin (hazardous) waste must be transferred to the
-        DPCC-designated vehicle at depot. Do NOT mix with general waste load.
+        an authorized collection service. Do NOT mix it with general waste.
     </div>
     """, unsafe_allow_html=True)

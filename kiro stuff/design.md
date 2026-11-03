@@ -2,9 +2,9 @@
 
 ## Overview
 
-The AI-Driven Circular Waste Intelligence System is a comprehensive municipal waste management platform designed for the Municipal Corporation of Delhi (MCD). The system leverages computer vision, time series forecasting, route optimization, and natural language processing to transform waste management operations. It provides real-time waste classification at collection points using IoT cameras, predicts ward-wise waste generation patterns, optimizes collection routes to minimize emissions, and offers an LLM-powered dashboard for administrators to gain actionable insights. Additionally, it includes a citizen incentive tracker to encourage proper waste segregation at the source.
+The AI-Driven Circular Waste Intelligence System is a municipal waste management platform being adapted for a Tirurangadi Municipality pilot in Kerala. The ward names follow the Government of Kerala Local Self Government Department's 2020 election roster; confirm the current roster with the municipality. Coordinates, performance figures, and operational data are illustrative and must be replaced with verified local data before operational use.
 
-The system addresses critical challenges in urban waste management: inefficient collection routes leading to high fuel consumption and emissions, lack of predictive capacity for waste generation, poor waste segregation at source, and limited data-driven decision-making capabilities for administrators. By integrating multiple AI/ML modules into a unified platform, the system enables MCD to transition toward a circular economy model where waste is treated as a resource rather than a burden.
+The system is intended to help address waste-management challenges such as inefficient collection routes, limited forecasting, waste segregation, and gaps in data-driven planning. Local workflows, service rules, and processing destinations must be confirmed with Tirurangadi Municipality.
 
 The architecture follows a microservices pattern with Python-based backend services (FastAPI), React frontend, PostgreSQL database, and real-time data pipelines for IoT camera feeds. Each AI module operates independently but shares data through a common data layer, ensuring scalability and maintainability.
 
@@ -659,7 +659,7 @@ class WasteForecast(Base):
 - confidence_score must be between 0.0 and 1.0
 - day_of_week must be between 0 and 6
 - humidity_percentage must be between 0 and 100
-- temperature_celsius must be between -10 and 50 (Delhi climate)
+- temperature_celsius must be within a locally configured and validated range
 - forecast_date must be in the future relative to created_at
 
 ### Model 3: OptimizedRoute
@@ -761,8 +761,8 @@ class CollectionPoint(Base):
 ```
 
 **Validation Rules**:
-- latitude must be between 28.4 and 28.9 (Delhi bounds)
-- longitude must be between 76.8 and 77.4 (Delhi bounds)
+- latitude must be within the configured Tirurangadi pilot area
+- longitude must be within the configured Tirurangadi pilot area
 - max_capacity_liters must be positive
 - current_fill_level_percentage must be between 0.0 and 100.0
 - priority_level must be between 1 and 5

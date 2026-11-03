@@ -183,17 +183,17 @@ elif active_tab == "Rewards":
     <div style="background:#0d2010;border:1px solid #4ade8030;border-radius:10px;
                 padding:0.75rem 1rem;margin-bottom:1.25rem;font-size:0.8rem;color:#86efac;">
         Points are earned by your ward collectively when segregation scores are high.
-        Redeem individually at any MCD office or via the Delhi One portal.
+        Rewards are illustrative. Confirm redemption options with the local body before enabling them.
     </div>
     """, unsafe_allow_html=True)
 
     REWARDS = [
-        {"title": "DMRC Metro Credits",        "sub": "₹50 metro card top-up",           "pts": 500,  "icon": "🚇"},
+        {"title": "Community Green Points",    "sub": "Pilot reward; local partner to confirm", "pts": 500,  "icon": "🌱"},
         {"title": "Electricity Bill Discount",  "sub": "5% discount on next bill",        "pts": 1000, "icon": "⚡"},
-        {"title": "DDA Tree Plantation",        "sub": "Plant a tree in your name",       "pts": 750,  "icon": "🌳"},
-        {"title": "MCD Complaint Priority",     "sub": "Priority queue for 30 days",      "pts": 300,  "icon": "🔧"},
-        {"title": "Water Bill Discount",        "sub": "₹80 off Delhi Jal Board bill",    "pts": 800,  "icon": "💧"},
-        {"title": "Green Citizen Certificate",  "sub": "Digital certificate from MCD",    "pts": 200,  "icon": "🏅"},
+        {"title": "Community Tree Planting",    "sub": "Plant a tree with a local group", "pts": 750,  "icon": "🌳"},
+        {"title": "Local Service Recognition",  "sub": "Pilot reward; subject to approval", "pts": 300,  "icon": "🔧"},
+        {"title": "Reusable Household Kit",     "sub": "Pilot reward; local partner to confirm", "pts": 800, "icon": "💧"},
+        {"title": "Green Citizen Certificate",  "sub": "Digital pilot certificate",       "pts": 200,  "icon": "🏅"},
     ]
 
     if "redeem_success" not in st.session_state:
@@ -233,9 +233,8 @@ elif active_tab == "Rewards":
                 <div>Reference: <span style="color:#e8ede9;font-family:'DM Mono',monospace;">{ref}</span></div>
                 <div>Status: <span style="color:#fbbf24;">Pending partner verification</span></div>
                 <div style="margin-top:0.5rem;font-size:0.75rem;color:#4b6358;">
-                    Pilot redemption in partnership with DMRC and BSES Rajdhani.
-                    Confirmation SMS will be sent within 24hrs of ward segregation score verification.
-                    Present this reference at any MCD ward office or Delhi One portal.
+                    This is a demonstration request only. A local partner and redemption process
+                    must be configured before real rewards are offered.
                 </div>
             </div>
         </div>
@@ -403,7 +402,7 @@ elif active_tab == "Community Nudges":
         "channel_color": "#60a5fa",
         "icon": "📢",
         "border": "#4ade80",
-        "msg": "CycleIQ Weekly: Delhi recycled 847 tonnes this week. Top ward: Dwarka. Keep segregating — every bin counts!"
+        "msg": "CycleIQ weekly update: check your pilot dashboard for the latest collection and segregation data."
     })
 
     for n in nudges[:8]:

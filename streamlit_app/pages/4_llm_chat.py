@@ -45,7 +45,7 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:1.2rem 0 1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
         <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CycleIQ</div>
-        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Delhi Waste Intelligence</div>
+        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
         <div style="margin-top:0.75rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
             <span style="background:#0d2010;border:1px solid #4ade8030;color:#4ade80;font-size:0.62rem;padding:1px 7px;border-radius:10px;">IoT Live</span>
             <span style="background:#0d1a2e;border:1px solid #60a5fa30;color:#60a5fa;font-size:0.62rem;padding:1px 7px;border-radius:10px;">YOLOv8</span>
@@ -89,7 +89,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
     st.session_state.messages.append({
         "role": "assistant",
-        "content": "Namaste! I'm your CycleIQ assistant — I can help you analyze waste data, identify problem areas, and give you actionable insights for Delhi's waste management. What would you like to know?"
+        "content": "Namaskaram! I'm your CycleIQ assistant — I can help analyze the configured Tirurangadi pilot data, identify problem areas, and suggest actions. What would you like to know?"
     })
 
 # Suggested queries
@@ -124,7 +124,7 @@ with chat_container:
 st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
 col_input, col_btn = st.columns([6, 1])
 with col_input:
-    user_input = st.text_input("Ask anything about Delhi's waste data...", key="chat_input", label_visibility="collapsed")
+    user_input = st.text_input("Ask about the Tirurangadi pilot data...", key="chat_input", label_visibility="collapsed")
 with col_btn:
     send = st.button("Send", use_container_width=True)
 
