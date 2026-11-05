@@ -19,6 +19,28 @@ header { visibility: visible; }
 </style>
 """, unsafe_allow_html=True)
 
+with st.sidebar:
+    st.markdown("""
+    <div style="padding:1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
+        <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;">♻️ CleanWave</div>
+        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown("**Main**")
+    st.page_link("app.py", label="Live Overview", icon="📊")
+    st.page_link("pages/0_home.py", label="About CleanWave", icon="ℹ️")
+    st.page_link("pages/1_waste_map.py", label="Waste Map", icon="🗺️")
+    st.markdown("**Intelligence**")
+    st.page_link("pages/2_forecasting.py", label="Forecasting", icon="📈")
+    st.page_link("pages/3_routes.py", label="Route Optimizer", icon="🛣️")
+    st.page_link("pages/4_llm_chat.py", label="AI Assistant", icon="🤖")
+    st.page_link("pages/6_cv_classify.py", label="Waste Classifier", icon="📷")
+    st.page_link("pages/9_bin_monitor.py", label="Bin Monitor", icon="🎥")
+    st.markdown("**People**")
+    st.page_link("pages/5_citizens.py", label="Citizens & Rewards", icon="👥")
+    st.markdown("**Operations**")
+    st.page_link("pages/8_driver_view.py", label="Driver View", icon="🚛")
+
 city = get_all_wards_summary()
 
 # ── Hero ──────────────────────────────────────────────────────────────────────
@@ -33,14 +55,11 @@ st.markdown(f"""
     </div>
     <div style="font-size:1.2rem;color:#6b8f74;max-width:600px;line-height:1.6;margin-bottom:1.5rem;">
         AI-powered circular waste intelligence for Tirurangadi Municipality, Kerala.
-        A pilot-ready dashboard using clearly marked sample data.
+        A prototype dashboard using simulated data; it is not connected to municipal IoT bins or truck tracking.
     </div>
     <div style="display:flex;gap:1rem;flex-wrap:wrap;">
         <div style="background:#0d2010;border:1px solid #4ade8040;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;color:#4ade80;">
             🟢 {city['daily_waste_monitored_tonnes']:,} tonnes/day sample scenario
-        </div>
-        <div style="background:#0d1a2e;border:1px solid #60a5fa40;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;color:#60a5fa;">
-            🔵 39 ward names from the 2020 official roster
         </div>
         <div style="background:#1a0800;border:1px solid #f8717140;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;color:#f87171;">
             🔴 {city['daily_landfill_reduction']} t/day sample diversion scenario
@@ -48,6 +67,7 @@ st.markdown(f"""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 # ── Problem ───────────────────────────────────────────────────────────────────
 st.markdown("### The Problem")
@@ -60,10 +80,10 @@ problems = [
 for col, (stat, label, desc, color) in zip([col1, col2, col3], problems):
     with col:
         st.markdown(f"""
-        <div style="background:#111a15;border:1px solid #1e2e24;border-radius:12px;padding:1.25rem;height:140px;">
-            <div style="font-size:1.4rem;font-weight:700;color:{color};font-family:'DM Mono',monospace;">{stat}</div>
-            <div style="font-size:0.82rem;font-weight:600;color:#e8ede9;margin:0.3rem 0;">{label}</div>
-            <div style="font-size:0.75rem;color:#6b8f74;line-height:1.5;">{desc}</div>
+        <div style="background:#111a15;border:1px solid #1e2e24;border-radius:12px;padding:1.25rem;min-height:160px;box-sizing:border-box;overflow-wrap:break-word;">
+            <div style="font-size:1.05rem;font-weight:700;line-height:1.3;color:{color};font-family:'DM Sans',sans-serif;word-break:normal;">{stat}</div>
+            <div style="font-size:0.85rem;font-weight:600;color:#e8ede9;margin:0.4rem 0;">{label}</div>
+            <div style="font-size:0.78rem;color:#6b8f74;line-height:1.55;">{desc}</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -72,12 +92,12 @@ st.markdown("<div style='height:1.5rem'></div>", unsafe_allow_html=True)
 # ── Solution ──────────────────────────────────────────────────────────────────
 st.markdown("### How CleanWave Works")
 steps = [
-    ("📡", "IoT Sensors", "Ultrasonic sensors on bins report fill levels every 30 seconds. No manual inspection needed."),
-    ("🤖", "AI Classification", "YOLOv8 camera at collection points identifies waste type. 3-bin system: Green · Blue · Red."),
-    ("📈", "Smart Forecasting", "Prophet ML predicts overflow 48hrs before it happens — before festivals, weekends."),
-    ("🚛", "Route Optimisation", "OR-Tools sends trucks only where needed. 22% fewer km driven. Real CO₂ reduction."),
-    ("🏆", "Citizen Incentives", "Wards can earn sample points; confirm reward partners and redemption rules locally."),
-    ("♻️", "Circular Economy", "Every classification feeds a live material flow tracker showing real diverted tonnage."),
+    ("📡", "Fill-Level Simulation", "Sample bin fill levels change in software. No Tirurangadi IoT bins are connected."),
+    ("🤖", "AI Classification", "Upload an image or use a camera for a demo waste classification; results are not municipal inspection records."),
+    ("📈", "Sample Forecasting", "Forecasts use generated history, not verified Tirurangadi collection measurements."),
+    ("🚛", "Demo Route Optimisation", "Routes use illustrative collection points and simulated fill levels; they are not road-verified or dispatched to trucks."),
+    ("🏆", "Citizen Incentives", "Sample points and rewards illustrate a possible system; confirm real participants, partners, and rules locally."),
+    ("♻️", "Circular Economy", "Diversion and material-flow figures are illustrative scenarios, not measured waste or live tracking."),
 ]
 col_a, col_b, col_c = st.columns(3)
 for i, (icon, title, desc) in enumerate(steps):
@@ -97,16 +117,16 @@ st.markdown("<div style='height:1.5rem'></div>", unsafe_allow_html=True)
 # ── Navigation guide ──────────────────────────────────────────────────────────
 st.markdown("### Explore the Dashboard")
 nav_items = [
-    ("🏠", "Overview", "Live KPIs, fill levels, and alerts across all 39 roster wards"),
-    ("🗺️", "Waste Map", "Real-time Folium map — toggle Fill / Hazardous / Both layers"),
-    ("📈", "Forecasting", "7-day Prophet forecast per ward — see which wards will overflow"),
-    ("🚛", "Route Optimizer", "OR-Tools optimised truck routes — live fill data, CO₂ calculated"),
-    ("🤖", "AI Assistant", "Ask about the configured pilot data via Groq/GPT-OSS 20B"),
-    ("👥", "Citizens & Rewards", "Leaderboard, rewards redemption, ward report card, community nudges"),
-    ("📷", "Waste Classifier", "Upload image or use live camera — YOLOv8 identifies waste type + correct bin"),
+    ("🏠", "Overview", "Dashboard metrics use simulated or configured sample data, not verified municipal reporting"),
+    ("🗺️", "Waste Map", "Shows illustrative collection-point coordinates and simulated fill levels"),
+    ("📈", "Forecasting", "Forecasts are based on generated sample history, not verified local measurements"),
+    ("🚛", "Route Optimizer", "Demo routes use illustrative coordinates; they are not road-verified or dispatched"),
+    ("🤖", "AI Assistant", "Ask about configured data; answers may reflect sample rather than verified local records"),
+    ("👥", "Citizens & Rewards", "Sample leaderboard and rewards; citizen names and points are not verified"),
+    ("📷", "Waste Classifier", "Classify an uploaded image or camera frame for demonstration"),
     ("♻️", "Circular Economy", "Illustrative material-flow scenario; configure verified local data before use"),
-    ("🚛", "Driver View", "Simplified route card for truck drivers — same routes as optimizer"),
-    ("🎥", "Bin Monitor", "Upload sorting video — zone-based detection, correct/wrong bin, fill estimation"),
+    ("🚛", "Driver View", "Displays optimizer-generated demo routes; it does not track trucks or dispatch jobs"),
+    ("🎥", "Bin Monitor", "Analyze an uploaded sorting video; no live bin-monitoring devices are connected"),
 ]
 col1, col2 = st.columns(2)
 for i, (icon, title, desc) in enumerate(nav_items):
@@ -171,20 +191,3 @@ with col_d3:
     """, unsafe_allow_html=True)
 
 st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
-
-# ── Team ──────────────────────────────────────────────────────────────────────
-st.markdown("""
-<div style="background:#111a15;border:1px solid #1e2e24;border-radius:12px;padding:1rem 1.5rem;
-            display:flex;align-items:center;justify-content:space-between;">
-    <div>
-        <div style="font-size:0.75rem;color:#6b8f74;text-transform:uppercase;letter-spacing:0.08em;">Team Sigmoid · JSS University</div>
-        <div style="font-size:0.88rem;color:#e8ede9;margin-top:0.3rem;">
-            Rehaan Ahmad Khan &nbsp;·&nbsp; Krishna Agarwaal &nbsp;·&nbsp; Daksh Kumar
-        </div>
-    </div>
-    <div style="font-size:0.75rem;color:#4ade80;font-family:'DM Mono',monospace;text-align:right;">
-        India Innovates 2026<br>
-        <span style="color:#6b8f74;">Tirurangadi Municipality · Kerala</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
