@@ -6,6 +6,7 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 #MainMenu, footer { visibility: hidden; }
+[data-testid="stHeaderActionElements"] { display: none !important; }
 header { visibility: visible; }
 .stApp { background: #0a0f0d; color: #e8ede9; }
 .block-container { padding: 1.5rem 2rem; max-width: 900px; }
@@ -44,7 +45,7 @@ API = _get_api()
 with st.sidebar:
     st.markdown("""
     <div style="padding:1.2rem 0 1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
-        <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CycleIQ</div>
+        <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CleanWave</div>
         <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
         <div style="margin-top:0.75rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
             <span style="background:#0d2010;border:1px solid #4ade8030;color:#4ade80;font-size:0.62rem;padding:1px 7px;border-radius:10px;">IoT Live</span>
@@ -55,7 +56,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     st.markdown('<div style="font-size:0.65rem;color:#4ade80;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4rem;padding-left:2px;">Main</div>', unsafe_allow_html=True)
     st.page_link("app.py", label="Live Overview", icon="📊")
-    st.page_link("pages/0_home.py", label="About CycleIQ", icon="ℹ️")
+    st.page_link("pages/0_home.py", label="About CleanWave", icon="ℹ️")
     st.page_link("pages/1_waste_map.py", label="Waste Map", icon="🗺️")
     st.markdown('<div style="font-size:0.65rem;color:#6b8f74;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin:0.75rem 0 0.4rem 0;padding-left:2px;">Intelligence</div>', unsafe_allow_html=True)
     st.page_link("pages/2_forecasting.py", label="Forecasting", icon="📈")
@@ -82,14 +83,14 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-header"><h1>AI Assistant</h1><span>Llama 3.1 via Groq</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-header"><h1>AI Assistant</h1><span>GPT-OSS 20B via Groq</span></div>', unsafe_allow_html=True)
 
 # Init chat
 if "messages" not in st.session_state:
     st.session_state.messages = []
     st.session_state.messages.append({
         "role": "assistant",
-        "content": "Namaskaram! I'm your CycleIQ assistant — I can help analyze the configured Tirurangadi pilot data, identify problem areas, and suggest actions. What would you like to know?"
+        "content": "Namaskaram! I'm your CleanWave assistant — I can help analyze the configured Tirurangadi pilot data, identify problem areas, and suggest actions. What would you like to know?"
     })
 
 # Suggested queries
@@ -118,7 +119,7 @@ with chat_container:
         if msg["role"] == "user":
             st.markdown(f'<div class="msg-label user">You</div><div class="msg-user">{msg["content"]}</div>', unsafe_allow_html=True)
         else:
-            st.markdown(f'<div class="msg-label assistant">CycleIQ Assistant</div><div class="msg-assistant">{msg["content"]}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="msg-label assistant">CleanWave Assistant</div><div class="msg-assistant">{msg["content"]}</div>', unsafe_allow_html=True)
 
 # Input
 st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)

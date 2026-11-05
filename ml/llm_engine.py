@@ -5,11 +5,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
+if MODEL == "llama-3.1-8b-instant":
+    MODEL = "openai/gpt-oss-20b"
 
-SYSTEM_PROMPT = """You are CycleIQ Assistant, an AI co-pilot for Tirurangadi Municipality waste-management staff.
+SYSTEM_PROMPT = """You are CleanWave Assistant, an AI co-pilot for Tirurangadi Municipality waste-management staff.
 
-You have access to REAL live data from the CycleIQ system passed in every query. Use ONLY the numbers provided in the context — never make up statistics.
+You have access to REAL live data from the CleanWave system passed in every query. Use ONLY the numbers provided in the context — never make up statistics.
 
 The data you receive includes:
 - total_citizens: total registered citizens

@@ -47,7 +47,7 @@ def register_citizen(data: CitizenCreate, db: Session = Depends(get_db)):
                       total_points=0, tier="Bronze")
     db.add(citizen)
     db.commit()
-    return {"id": citizen.id, "message": f"Welcome to CycleIQ, {data.name}!"}
+    return {"id": citizen.id, "message": f"Welcome to CleanWave, {data.name}!"}
 
 @router.post("/activity")
 def log_activity(data: ActivityLog, db: Session = Depends(get_db)):

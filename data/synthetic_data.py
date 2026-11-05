@@ -101,9 +101,19 @@ def generate_waste_history(days=180):
     return history
 
 def generate_citizens(count=100):
-    first_names = ["Amit", "Priya", "Rahul", "Sunita", "Vikram", "Anjali", "Rohit", "Kavya",
-                   "Deepak", "Neha", "Sanjay", "Pooja", "Arun", "Meena", "Rajesh", "Divya"]
-    last_names = ["Sharma", "Gupta", "Singh", "Kumar", "Verma", "Agarwal", "Yadav", "Joshi"]
+    first_names = [
+        "Muhammed", "Fathima", "Amina", "Aisha", "Abdul Rahman", "Shahana",
+        "Niyas", "Hiba", "Ashraf", "Rasiya", "Nabeel", "Suhara", "Muneer",
+        "Shameer", "Rashid", "Anjali", "Arjun", "Sreedevi", "Vishnu", "Athira",
+        "Nikhil", "Akhil", "Sreejith", "Anoop", "Rajeev", "Deepa", "Lakshmi",
+        "Kavitha", "Remya", "Manju", "Neethu", "Joseph", "Thomas", "Mathew",
+        "Anu", "Binu", "Jisna", "Sanjay", "Sreelakshmi",
+    ]
+    last_names = [
+        "Koya", "Kutty", "Rahman", "Basheer", "Hameed", "Nair", "Menon",
+        "Pillai", "Kurup", "Panicker", "Varghese", "Thomas", "Joseph",
+        "Mathew", "Chacko", "Puthanveettil",
+    ]
     citizens = []
     for i in range(count):
         ward = random.choice(TIRURANGADI_WARDS)

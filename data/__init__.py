@@ -1,1 +1,1 @@
-"""Data sources used by the CycleIQ application."""
+"""Data sources used by the CleanWave application."""

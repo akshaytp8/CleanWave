@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="CycleIQ — Tirurangadi Waste Intelligence",
+    page_title="CleanWave — Tirurangadi Waste Intelligence",
     page_icon="🌿",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -12,6 +12,7 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 #MainMenu, footer { visibility: hidden; }
+[data-testid="stHeaderActionElements"] { display: none !important; }
 header { visibility: visible; }
 .block-container { padding: 1.5rem 2rem 2rem 2rem; max-width: 1400px; }
 .stApp { background: #0a0f0d; color: #e8ede9; }
@@ -88,7 +89,7 @@ def load_citizen_stats():
 with st.sidebar:
     st.markdown("""
     <div style="padding:1.2rem 0 1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
-        <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CycleIQ</div>
+        <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;letter-spacing:-0.02em;">♻️ CleanWave</div>
         <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
         <div style="margin-top:0.75rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
             <span style="background:#0d2010;border:1px solid #4ade8030;color:#4ade80;font-size:0.62rem;padding:1px 7px;border-radius:10px;">IoT Live</span>
@@ -99,7 +100,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.markdown('<div style="font-size:0.65rem;color:#4ade80;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.4rem;padding-left:2px;">Main</div>', unsafe_allow_html=True)
-    st.page_link("pages/0_home.py", label="About CycleIQ", icon="ℹ️")
+    st.page_link("pages/0_home.py", label="About CleanWave", icon="ℹ️")
     st.page_link("app.py", label="Live Overview", icon="📊")
     st.page_link("pages/1_waste_map.py", label="Waste Map", icon="🗺️")
 
@@ -365,7 +366,7 @@ with tab_economy:
     eco_col1, eco_col2 = st.columns([3,2], gap="large")
 
     with eco_col1:
-        st.markdown("**Before vs With CycleIQ — Daily Waste Flow**")
+        st.markdown("**Before vs With CleanWave — Daily Waste Flow**")
         before_after = [
             ("🔴 Landfill", round(d*BASELINE_LANDFILL_RATE), round(d*CYCLEIQ_LANDFILL_RATE), "#ef4444"),
             ("🔵 Recycled", round(d*BASELINE_RECYCLING_RATE), round(d*CYCLEIQ_RECYCLING_RATE), "#60a5fa"),

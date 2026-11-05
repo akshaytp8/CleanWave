@@ -8,6 +8,7 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 #MainMenu, footer { visibility: hidden; }
+[data-testid="stHeaderActionElements"] { display: none !important; }
 header { visibility: visible; }
 .stApp { background: #0a0f0d; color: #e8ede9; }
 .block-container { padding: 1.5rem 2rem; max-width: 1400px; }
@@ -35,6 +36,28 @@ def _get_api():
         return render
 
 API = _get_api()
+
+with st.sidebar:
+    st.markdown("""
+    <div style="padding:1.2rem 0;border-bottom:1px solid #1e2e24;margin-bottom:1rem;">
+        <div style="font-size:1.5rem;font-weight:700;color:#e8ede9;">♻️ CleanWave</div>
+        <div style="font-size:0.7rem;color:#4ade80;font-family:'DM Mono',monospace;margin-top:3px;">Tirurangadi Municipality · Kerala</div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown("**Main**")
+    st.page_link("app.py", label="Live Overview", icon="📊")
+    st.page_link("pages/0_home.py", label="About CleanWave", icon="ℹ️")
+    st.page_link("pages/1_waste_map.py", label="Waste Map", icon="🗺️")
+    st.markdown("**Intelligence**")
+    st.page_link("pages/2_forecasting.py", label="Forecasting", icon="📈")
+    st.page_link("pages/3_routes.py", label="Route Optimizer", icon="🛣️")
+    st.page_link("pages/4_llm_chat.py", label="AI Assistant", icon="🤖")
+    st.page_link("pages/6_cv_classify.py", label="Waste Classifier", icon="📷")
+    st.page_link("pages/9_bin_monitor.py", label="Bin Monitor", icon="🎥")
+    st.markdown("**People**")
+    st.page_link("pages/5_citizens.py", label="Citizens & Rewards", icon="👥")
+    st.markdown("**Operations**")
+    st.page_link("pages/8_driver_view.py", label="Driver View", icon="🚛")
 
 @st.cache_data(ttl=30)
 def load_stats():
@@ -361,7 +384,7 @@ elif active_tab == "Ward Report Card":
 elif active_tab == "Community Nudges":
     st.markdown("""
     <div style="font-size:0.8rem;color:#6b8f74;margin-bottom:1.25rem;">
-        When ward data crosses thresholds, CycleIQ auto-triggers alerts to RWA group admins via WhatsApp or SMS.
+        When ward data crosses thresholds, CleanWave auto-triggers alerts to RWA group admins via WhatsApp or SMS.
     </div>
     """, unsafe_allow_html=True)
 
@@ -402,7 +425,7 @@ elif active_tab == "Community Nudges":
         "channel_color": "#60a5fa",
         "icon": "📢",
         "border": "#4ade80",
-        "msg": "CycleIQ weekly update: check your pilot dashboard for the latest collection and segregation data."
+        "msg": "CleanWave weekly update: check your pilot dashboard for the latest collection and segregation data."
     })
 
     for n in nudges[:8]:

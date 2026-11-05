@@ -1,4 +1,4 @@
-# CycleIQ — AI-Powered Circular Waste Intelligence for Tirurangadi
+# CleanWave — AI-Powered Circular Waste Intelligence for Tirurangadi
 
 > **India Innovates 2026 Hackathon** · Team Sigmoid · JSS University  
 > Domain: Urban Solutions · Prize Pool: ₹10,00,000+
@@ -7,15 +7,15 @@
 
 ## The Problem
 
-CycleIQ is being adapted as a **Tirurangadi Municipality pilot** in Malappuram district, Kerala. It uses the 39 ward names listed in the [Government of Kerala Local Self Government Department's 2020 election roster](https://lsgkerala.gov.in/en/lbelection/electdmemberdet/2020/1274). Verify the current ward list with the municipality before operational use. The repository's waste estimates, population coverage, collection schedules, and processing destinations remain demonstration data; the plotted ward coordinates are approximate markers around Chemmad, not ward boundaries or centroids.
+CleanWave is being adapted as a **Tirurangadi Municipality pilot** in Malappuram district, Kerala. It uses the 39 ward names listed in the [Government of Kerala Local Self Government Department's 2020 election roster](https://lsgkerala.gov.in/en/lbelection/electdmemberdet/2020/1274). Verify the current ward list with the municipality before operational use. The repository's waste estimates, population coverage, collection schedules, and processing destinations remain demonstration data; the plotted ward coordinates are approximate markers around Chemmad, not ward boundaries or centroids.
 
 The pilot should establish its baseline with local operators before treating any dashboard metric as a measured result.
 
 ---
 
-## What CycleIQ Does
+## What CleanWave Does
 
-CycleIQ is an end-to-end waste intelligence platform that closes the loop between **citizens, bins, trucks, and city planners** using computer vision, IoT simulation, route optimization, and AI forecasting.
+CleanWave is an end-to-end waste intelligence platform that closes the loop between **citizens, bins, trucks, and city planners** using computer vision, IoT simulation, route optimization, and AI forecasting.
 
 The system targets **community collection points** where residents hand over segregated waste to local collection teams. Collection workflows, accepted material categories, service schedules, and disposal destinations must follow the participating local body's procedures.
 
@@ -26,7 +26,7 @@ The system targets **community collection points** where residents hand over seg
 ### 1. Computer Vision at Source
 A camera mounted above a community collection point can help monitor waste sorting. The local body should determine the appropriate categories, bin colors, signage, and handling procedures for the pilot.
 
-CycleIQ uses **YOLOv8**, a state-of-the-art real-time object detection model, to classify waste as:
+CleanWave uses **YOLOv8**, a state-of-the-art real-time object detection model, to classify waste as:
 - **Biodegradable** — food waste, organic matter
 - **Recyclable** — plastic, paper, metal, glass
 - **Hazardous** — electronics, batteries, chemicals
@@ -34,34 +34,34 @@ CycleIQ uses **YOLOv8**, a state-of-the-art real-time object detection model, to
 A **segregation score** (0–100) is calculated per classification based on how cleanly a single waste type dominates. High scores mean good segregation. Low scores trigger alerts.
 
 ### 2. Citizen Incentives Tied to Segregation Quality
-When a ward's collection points consistently show high segregation scores, citizens in that ward earn points on the CycleIQ platform. This is community-level gamification — not individual surveillance — creating peer pressure and collective accountability. Citizens can view their ward's leaderboard and track their own contribution.
+When a ward's collection points consistently show high segregation scores, citizens in that ward earn points on the CleanWave platform. This is community-level gamification — not individual surveillance — creating peer pressure and collective accountability. Citizens can view their ward's leaderboard and track their own contribution.
 
 Any citizen reward program is a demonstration only until its local partners, redemption process, and approval are confirmed.
 
 ### 3. IoT Fill Level Monitoring
-Each bin is equipped with an **ultrasonic sensor** that measures the distance from the sensor to the waste surface, calculating fill percentage. This data is transmitted in real time to the CycleIQ API via GSM or LoRa network.
+Each bin is equipped with an **ultrasonic sensor** that measures the distance from the sensor to the waste surface, calculating fill percentage. This data is transmitted in real time to the CleanWave API via GSM or LoRa network.
 
 > In the current prototype, fill levels are simulated via a background IoT loop that updates 20% of collection points every 30 seconds — demonstrating the real-time data pipeline. In production, this feed is replaced by actual sensor hardware. Sensor-based smart bins are already deployed commercially in Indian cities including Pune and Indore, as well as internationally by companies like Bigbelly and Sensoneo.
 
 ### 4. AI-Optimised Route Planning
-CycleIQ uses **Google OR-Tools** with a GlobalSpanCostCoefficient constraint to generate balanced truck routes based on live fill data. Trucks are only dispatched to bins that are above a fill threshold, and routes are distributed evenly across the truck fleet to prevent any single truck being overloaded.
+CleanWave uses **Google OR-Tools** with a GlobalSpanCostCoefficient constraint to generate balanced truck routes based on live fill data. Trucks are only dispatched to bins that are above a fill threshold, and routes are distributed evenly across the truck fleet to prevent any single truck being overloaded.
 
 This replaces fixed-schedule collection — a major source of inefficiency — with demand-driven collection. The system visualises routes on an interactive map with per-truck details including estimated distance and number of stops.
 
 ### 5. 7-Day Waste Volume Forecasting
-Using **Facebook Prophet** (with a statistical fallback for environments where Prophet is unavailable), CycleIQ can forecast waste volume for configured pilot wards. The current sample history is illustrative; replace it with verified Tirurangadi collection records.
+Using **Facebook Prophet** (with a statistical fallback for environments where Prophet is unavailable), CleanWave can forecast waste volume for configured pilot wards. The current sample history is illustrative; replace it with verified Tirurangadi collection records.
 
 This allows city planners to pre-position trucks and staff before high-volume periods (festivals, weekends, seasonal spikes) rather than reacting after bins overflow.
 
 ### 6. Circular Economy Tracking
-CycleIQ quantifies the environmental impact of the system in real time:
+CleanWave quantifies the environmental impact of the system in real time:
 - **Recycling diversion rate** — what percentage of waste is being recovered instead of landfilled
 - **Composting potential** — organic waste available for composting
 - **CO₂ savings** — calculated against a full-landfill baseline
 - **Material flow Sankey diagram** — visualises where each tonne of waste goes
 
 ### 7. AI Chat for City Officials
-A natural language interface powered by **Groq / Llama 3.1** allows city officials to query the system in plain English: *"Which ward has the highest hazardous waste concentration?"* or *"Which bins need urgent collection today?"* The LLM responds using real data from the database, not generic answers.
+A natural language interface powered by **Groq / GPT-OSS 20B** allows city officials to query the system in plain English: *"Which ward has the highest hazardous waste concentration?"* or *"Which bins need urgent collection today?"* The LLM responds using real data from the database, not generic answers.
 
 ---
 
@@ -74,7 +74,7 @@ A natural language interface powered by **Groq / Llama 3.1** allows city officia
 | Computer Vision | YOLOv8n (Ultralytics) |
 | Forecasting | Facebook Prophet + statistical fallback |
 | Route Optimization | Google OR-Tools |
-| LLM | Groq API / Llama 3.1 8B Instant |
+| LLM | Groq API / GPT-OSS 20B |
 | Frontend | Streamlit |
 | Maps | Folium + streamlit-folium |
 | Charts | Plotly |
@@ -85,7 +85,7 @@ A natural language interface powered by **Groq / Llama 3.1** allows city officia
 ## Project Structure
 
 ```
-cycleiq/
+CleanWave/
 ├── main.py                          # FastAPI app + IoT simulation loop
 ├── database.py                      # Neon PostgreSQL connection
 ├── .env                             # Credentials (not committed)
@@ -105,7 +105,7 @@ cycleiq/
 │   ├── cv_module.py                 # YOLOv8 + image-aware fallback
 │   ├── forecasting.py               # Prophet + statistical fallback
 │   ├── route_optimizer.py           # OR-Tools balanced routing
-│   └── llm_engine.py                # Groq/Llama with real DB context
+│   └── llm_engine.py                # Groq/GPT-OSS with real DB context
 ├── data/
 │   └── synthetic_data.py            # 39 Tirurangadi wards (2020 roster) and demo data
 └── streamlit_app/
@@ -132,8 +132,8 @@ cycleiq/
 ### Installation
 
 ```bash
-git clone https://github.com/RAK2315/CycleIQ-Waste-Intelligence-System.git
-cd CycleIQ-Waste-Intelligence-System
+git clone https://github.com/akshaytp8/CleanWave.git
+cd CleanWave
 
 pip install fastapi uvicorn sqlalchemy psycopg2-binary python-dotenv pydantic groq python-multipart
 pip install streamlit plotly pandas numpy pillow httpx requests
@@ -150,7 +150,7 @@ Create a `.env` file in the root directory:
 ```
 DATABASE_URL=your_neon_postgresql_connection_string
 GROQ_API_KEY=your_groq_api_key
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 ```
 
 ### Running
@@ -182,7 +182,7 @@ An empty database seeds automatically on first startup with synthetic pilot data
 | Waste Map | Interactive Folium map of all collection points colour-coded by fill level, ward composition chart |
 | Forecasting | 7-day Prophet forecast per ward, historical trend, all-wards comparison |
 | Route Optimizer | OR-Tools balanced truck routes on map, per-truck stats, estimated savings |
-| AI Chat | Natural language queries against live database via Groq/Llama 3.1 |
+| AI Chat | Natural language queries against live database via Groq/GPT-OSS 20B |
 | Citizen Portal | Leaderboard, tier system (Bronze → Platinum), register new citizens |
 | CV Classifier | Live webcam stream with YOLOv8 bounding boxes, or image upload mode |
 | Circular Economy | Material flow Sankey, ward diversion rates, 30-day CO₂ savings trend |

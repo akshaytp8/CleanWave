@@ -7,7 +7,7 @@ import asyncio, random
 
 load_dotenv()
 
-app = FastAPI(title="CycleIQ API", version="1.0.0")
+app = FastAPI(title="CleanWave API", version="1.0.0")
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True,
                    allow_methods=["*"], allow_headers=["*"])
@@ -108,7 +108,7 @@ async def seed_data():
 @app.get("/")
 @app.head("/")
 def root():
-    return {"message": "CycleIQ API running", "version": "1.0.0"}
+    return {"message": "CleanWave API running", "version": "1.0.0"}
 
 @app.get("/health")
 @app.head("/health")

@@ -10,6 +10,7 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
 #MainMenu, footer { visibility: hidden; }
+[data-testid="stHeaderActionElements"] { display: none !important; }
 header { visibility: visible; }
 .stApp { background: #0a0f0d; color: #e8ede9; }
 .block-container { padding: 2rem 3rem; max-width: 1200px; }
@@ -28,7 +29,7 @@ st.markdown(f"""
         India Innovates 2026 · Urban Solutions Track
     </div>
     <div style="font-size:3rem;font-weight:700;color:#e8ede9;line-height:1.1;margin-bottom:1rem;">
-        CycleIQ
+        CleanWave
     </div>
     <div style="font-size:1.2rem;color:#6b8f74;max-width:600px;line-height:1.6;margin-bottom:1.5rem;">
         AI-powered circular waste intelligence for Tirurangadi Municipality, Kerala.
@@ -69,7 +70,7 @@ for col, (stat, label, desc, color) in zip([col1, col2, col3], problems):
 st.markdown("<div style='height:1.5rem'></div>", unsafe_allow_html=True)
 
 # ── Solution ──────────────────────────────────────────────────────────────────
-st.markdown("### How CycleIQ Works")
+st.markdown("### How CleanWave Works")
 steps = [
     ("📡", "IoT Sensors", "Ultrasonic sensors on bins report fill levels every 30 seconds. No manual inspection needed."),
     ("🤖", "AI Classification", "YOLOv8 camera at collection points identifies waste type. 3-bin system: Green · Blue · Red."),
@@ -100,7 +101,7 @@ nav_items = [
     ("🗺️", "Waste Map", "Real-time Folium map — toggle Fill / Hazardous / Both layers"),
     ("📈", "Forecasting", "7-day Prophet forecast per ward — see which wards will overflow"),
     ("🚛", "Route Optimizer", "OR-Tools optimised truck routes — live fill data, CO₂ calculated"),
-    ("🤖", "AI Assistant", "Ask about the configured pilot data via Groq/Llama 3.1"),
+    ("🤖", "AI Assistant", "Ask about the configured pilot data via Groq/GPT-OSS 20B"),
     ("👥", "Citizens & Rewards", "Leaderboard, rewards redemption, ward report card, community nudges"),
     ("📷", "Waste Classifier", "Upload image or use live camera — YOLOv8 identifies waste type + correct bin"),
     ("♻️", "Circular Economy", "Illustrative material-flow scenario; configure verified local data before use"),
